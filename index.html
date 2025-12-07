@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IEEE Student Branch - HITS</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- BRAND VARIABLES --- */
+        :root {
+            --hits-blue: #002147;
+            --hits-gold: #ffc107;
+            --navbar-height: 80px; 
+        }
+
+        /* --- SCROLL FIX FOR STICKY NAV --- */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: var(--navbar-height);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- BACKGROUND & OVERLAY --- */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: url('jubilee.jpg') center/cover no-repeat;
+            background-color: #f0f2f5; 
+            filter: blur(8px);
+            transform: scale(1.02);
+            z-index: -2;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 33, 71, 0.4); 
+            z-index: -1;
+        }
+
+        /* --- TOP BAR --- */
+        .top-bar {
+            background-color: rgba(255, 255, 255, 0.95);
+            font-size: 13px;
+            padding: 6px 0;
+            border-bottom: 1px solid #ddd;
+            z-index: 1031;
+            position: relative;
+        }
+        .top-bar a {
+            color: var(--hits-blue);
+            text-decoration: none;
+            margin-left: 15px;
+            transition: color 0.2s;
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background-color: rgba(0, 33, 71, 0.98); 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+        .logo-img {
+            height: 50px; 
+            width: auto;
+            border-radius: 4px;
+            background: white; 
+            padding: 2px;
+        }
+        .nav-link {
+            color: rgba(255,255,255,0.9) !important;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 14px;
+            padding: 10px 18px !important;
+            transition: 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--hits-gold) !important;
+        }
+
+        /* --- HERO SECTION (UPDATED BLUR) --- */
+        .hero-section {
+            position: relative;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white; 
+            text-align: center;
+            overflow: hidden;
+            margin-top: -1px;
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: transparent; 
+            backdrop-filter: blur(8px); 
+            z-index: -1;
+        }
+        .hero-text-shadow {
+            text-shadow: 0 2px 15px rgba(0,0,0,0.5);
+        }
+
+        .hero-btn {
+            background-color: var(--hits-gold);
+            color: var(--hits-blue);
+            font-weight: 800;
+            border: none;
+            padding: 14px 36px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 5px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .hero-btn:hover {
+            background-color: #fff;
+            color: var(--hits-blue);
+            transform: translateY(-2px);
+        }
+
+        /* --- LAYOUT UTILS --- */
+        .section-padding { padding: 80px 0; }
+        
+        .section-title {
+            color: var(--hits-blue);
+            font-weight: 800;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--hits-gold);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- GLASS CARD EFFECT --- */
+        .glass-container {
+            background: rgba(255, 255, 255, 0.95); 
+            border-radius: 1rem;
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+
+        /* --- SOCIETY CARDS --- */
+        .society-card {
+            background: white;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+            border-top: 5px solid var(--hits-blue);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .society-card:hover {
+            transform: translateY(-8px);
+            border-top-color: var(--hits-gold);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+        .society-icon {
+            font-size: 45px;
+            color: var(--hits-blue);
+            margin-bottom: 20px;
+        }
+        .society-logo-img {
+            max-height: 60px;
+            margin-bottom: 20px;
+            object-fit: contain;
+        }
+        .placeholder-card {
+            border-top: 5px solid #ccc;
+            opacity: 0.8;
+            border-style: dashed;
+        }
+        .placeholder-card:hover {
+            border-top-color: #999;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* --- EVENT GALLERY & CAROUSELS --- */
+        .events-wrapper {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 1.5rem;
+            padding: 3rem 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .event-card {
+            background-color: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            margin-bottom: 50px; 
+        }
+        .event-card:hover { transform: translateY(-3px); }
+
+        /* Carousel Image Styling */
+        .carousel-item {
+            height: 100%;
+            min-height: 350px;
+            background-color: #eee;
+        }
+        .carousel-item img {
+            height: 350px; 
+            object-fit: cover;
+            width: 100%;
+            object-position: top center;
+        }
+        @media (max-width: 991px) {
+            .carousel-item img { height: 250px; }
+            .carousel-item { min-height: 250px; }
+        }
+
+        /* --- POLISHED MODALS --- */
+        .modal-header {
+            background-color: var(--hits-blue);
+            color: white;
+            border-bottom: 4px solid var(--hits-gold);
+        }
+        .modal-title { font-weight: 700; letter-spacing: 0.5px; display: flex; align-items: center;}
+        .officer-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            transition: background 0.2s;
+        }
+        .officer-item:last-child { border-bottom: none; }
+        .officer-item:hover { background-color: #f8f9fa; }
+        .avatar-circle {
+            width: 50px;
+            height: 50px;
+            background-color: #e9ecef;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--hits-blue);
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            border: 2px solid var(--hits-gold);
+        }
+        .officer-info h6 { margin: 0; font-weight: 700; color: #333; }
+        .officer-info span { font-size: 0.85rem; color: #666; display: block; }
+        .officer-role { 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            color: var(--hits-blue);
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--hits-blue);
+            color: white;
+            padding: 60px 0 20px 0;
+            margin-top: 50px;
+            position: relative;
+            z-index: 1;
+        }
+        footer h5 {
+            color: var(--hits-gold);
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+        footer a { color: #e0e0e0; text-decoration: none; }
+        footer a:hover { color: var(--hits-gold); text-decoration: underline; }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 40px;
+            padding-top: 20px;
+            font-size: 14px;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        /* --- ANIMATIONS & UTILS --- */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #aboutMore {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: rgba(0, 33, 71, 0.05);
+            border-radius: 8px;
+            border-left: 4px solid var(--hits-gold);
+        }
+        
+        /* Scroll to Top Button */
+        #btn-back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            z-index: 999;
+            background-color: var(--hits-gold);
+            color: var(--hits-blue);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            font-size: 20px;
+        }
+        #btn-back-to-top:hover {
+            transform: translateY(-3px);
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <button type="button" id="btn-back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <div class="top-bar">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div>
+                <span class="me-3"><i class="fas fa-phone-alt me-1 text-primary"></i> 1800 425 44 38</span>
+                <span><i class="fas fa-envelope me-1 text-primary"></i> info@hindustanuniv.ac.in</span>
+            </div>
+            <div class="d-none d-md-block">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#top">
+                <img src="new-logo.svg" alt="HITS Logo" class="logo-img">
+                <span class="mx-3 text-white-50" style="font-size: 1.5rem;">|</span>
+                <img src="ieee logo.png" alt="IEEE Logo" class="logo-img">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#top">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#societies">IEEE Societies</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#events">Event Highlights</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header id="top" class="hero-section">
+        <div class="container fade-in-up" style="position: relative; z-index: 2;">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 hero-text-shadow">
+                    <h1 class="display-4 fw-bold mb-4">
+                        Hindustan Institute of Technology & Science
+                    </h1>
+                    <p class="lead mb-4 fs-3 fw-medium">
+                        Official IEEE Student Branch
+                    </p>
+                    <p class="mb-5 text-white-50 fw-medium">Empowering Students • Advancing Technology • Creating Leaders</p>
+                    <a href="#events" class="btn hero-btn shadow">View Gallery</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="section-padding fade-in-up">
+        <div class="container">
+            <div class="glass-container">
+                <div class="row align-items-center g-5">
+                    <div class="col-md-6">
+                        <img src="hitsbg.jpg" class="img-fluid rounded shadow-lg w-100" style="object-fit: cover; height: 400px;" alt="HITS Campus"
+                        onerror="this.src='https://placehold.co/600x400/002147/FFF?text=HITS+Campus';">
+                    </div>
+                    <div class="col-md-6">
+                        <h2 class="section-title text-start">About Hindustan</h2>
+                        <h4 class="text-primary fw-bold mb-3">Excellence Since 1985</h4>
+                        <p class="text-secondary">
+                            Hindustan Institute of Technology & Science(HITS) is a leading prestigious and
+                            recognized institution in India, located at Chennai, Tamil Nadu. It offers a wide spectrum of Undergraduate, Postgraduate, and Doctoral Programs.
+                        </p>
+                        <div class="collapse" id="aboutMore">
+                            <p>
+                                HITS is recognised as a Deemed to be University by UGC. The technical courses are approved by AICTE. We have achieved Tier 1 category accreditation from NBA for multiple engineering programs.
+                            </p>
+                            <p>
+                                <strong>Rankings:</strong> NIRF has ranked us in the 151–200 band overall. We are consistently ranked among the top private engineering institutions in India.
+                            </p>
+                        </div>
+                        <button class="btn btn-outline-primary mt-3 px-4 rounded-pill" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#aboutMore"
+                                aria-expanded="false" aria-controls="aboutMore">
+                            Read More <i class="fas fa-chevron-down ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <hr class="my-5" style="border-top: 2px dashed #ccc;">
+
+                <div class="row g-5">
+                    <div class="col-12">
+                        <div class="d-flex align-items-center mb-4">
+                             <img src="ieee logo.png" alt="IEEE Logo" style="height: 50px; width: auto; margin-right: 20px;">
+                            <h2 class="section-title text-start mb-0" style="--hits-blue: #00629B;">About IEEE</h2>
+                        </div>
+                        
+                        <h4 class="fw-bold mb-3" style="color: #00629B;">Advancing Technology for Humanity</h4>
+                        <p class="text-secondary">
+                            IEEE is the world's largest technical professional organization dedicated to advancing technology for the benefit of humanity. 
+                            IEEE and its members inspire a global community through its highly cited publications, conferences, technology standards, 
+                            and professional and educational activities.
+                        </p>
+                        <p class="text-secondary">
+                            The IEEE Student Branch at HITS provides a platform for students to grow technically and professionally, offering access to cutting-edge research and a global network of experts.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="societies" class="section-padding fade-in-up">
+        <div class="container">
+            <div class="glass-container">
+                <div class="text-center mb-5">
+                    <h2 class="section-title">Our IEEE Societies</h2>
+                    <p class="text-muted">Specialized technical chapters driving innovation.</p>
+                </div>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-4">
+                        <div class="card society-card p-4">
+                            <div class="card-body text-center d-flex flex-column justify-content-between">
+                                <div>
+                                    <i class="fas fa-lightbulb society-icon"></i>
+                                    <h5 class="fw-bold mb-3">Photonics Society</h5>
+                                    <p class="text-secondary small">
+                                        Focuses on lasers, fiber-optics, and imaging technologies.
+                                    </p>
+                                </div>
+                                <button class="btn btn-sm btn-outline-dark mt-2 rounded-pill w-100"
+                                        data-bs-toggle="modal" data-bs-target="#photoModal">
+                                    View Team
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card society-card p-4">
+                            <div class="card-body text-center d-flex flex-column justify-content-between">
+                                <div>
+                                    <i class="fas fa-code society-icon"></i>
+                                    <h5 class="fw-bold mb-3">Computer Society</h5>
+                                    <p class="text-secondary small">
+                                        Empowering students in AI, algorithms, and software.
+                                    </p>
+                                </div>
+                                <button class="btn btn-sm btn-outline-dark mt-2 rounded-pill w-100"
+                                        data-bs-toggle="modal" data-bs-target="#csModal">
+                                    View Team
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card society-card p-4">
+                            <div class="card-body text-center d-flex flex-column justify-content-between">
+                                <div>
+                                    <i class="fas fa-robot society-icon"></i>
+                                    <h5 class="fw-bold mb-3">Robotics (RAS)</h5>
+                                    <p class="text-secondary small">
+                                        Fostering the development and application of robotics.
+                                    </p>
+                                </div>
+                                <button class="btn btn-sm btn-outline-dark mt-2 rounded-pill w-100"
+                                        data-bs-toggle="modal" data-bs-target="#rasModal">
+                                    View Team
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card society-card p-4">
+                            <div class="card-body text-center d-flex flex-column justify-content-between">
+                                <div>
+                                    <i class="fas fa-satellite-dish society-icon"></i>
+                                    <h5 class="fw-bold mb-3">Communications</h5>
+                                    <p class="text-secondary small">
+                                        Advancing the technology of global communications and networking.
+                                    </p>
+                                </div>
+                                <button class="btn btn-sm btn-outline-dark mt-2 rounded-pill w-100"
+                                        data-bs-toggle="modal" data-bs-target="#commModal">
+                                    View Team
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card society-card p-4">
+                            <div class="card-body text-center d-flex flex-column justify-content-between">
+                                <div>
+                                    <i class="fas fa-wave-square society-icon"></i>
+                                    <h5 class="fw-bold mb-3">Signal Processing</h5>
+                                    <p class="text-secondary small">
+                                        The science behind our digital lives, audio, video, and communication.
+                                    </p>
+                                </div>
+                                <button class="btn btn-sm btn-outline-dark mt-2 rounded-pill w-100"
+                                        data-bs-toggle="modal" data-bs-target="#spModal">
+                                    View Team
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                   
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="csModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <img src="ieee cs logo.png" alt="Logo" style="height: 35px; background:white; border-radius:4px; padding:2px; margin-right:10px;">
+                        Computer Society (CS)
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="officer-list">
+                        <div class="officer-item">
+                            <div class="avatar-circle">P</div>
+                            <div class="officer-info">
+                                <h6>Porchezhiyan S</h6>
+                                <div class="officer-role">Chairman</div>
+                                <span>Computer Applications</span>
+                            </div>
+                        </div>
+                        <div class="officer-item">
+                            <div class="avatar-circle">Y</div>
+                            <div class="officer-info">
+                                <h6>Yanamala Venkata Teja</h6>
+                                <div class="officer-role">Vice Chairman</div>
+                                <span>CSE</span>
+                            </div>
+                        </div>
+                        <div class="officer-item">
+                            <div class="avatar-circle">T</div>
+                            <div class="officer-info">
+                                <h6>Tarun Prasad S</h6>
+                                <div class="officer-role">Treasurer</div>
+                                <span>Information Technology</span>
+                            </div>
+                        </div>
+                         <div class="officer-item bg-light">
+                            <div class="avatar-circle"><i class="fas fa-chalkboard-teacher"></i></div>
+                            <div class="officer-info">
+                                <h6>Prof. N. Ayyanathan</h6>
+                                <div class="officer-role">Faculty Advisor</div>
+                                <span>Computer Applications</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="photoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <img src="ieee photo logo.png" alt="Logo" style="height: 35px; background:white; border-radius:4px; padding:2px; margin-right:10px;">
+                        Photonics Society
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0">
+                     <div class="officer-list">
+                        <div class="officer-item">
+                            <div class="avatar-circle">S</div>
+                            <div class="officer-info">
+                                <h6>Ms. Sujitha. B</h6>
+                                <div class="officer-role">Branch Chair</div>
+                                <span>Student Branch Executive Committee</span>
+                            </div>
+                        </div>
+                        <div class="officer-item">
+                            <div class="avatar-circle">R</div>
+                            <div class="officer-info">
+                                <h6>Mr. Rushidhar</h6>
+                                <div class="officer-role">Branch Vice Chair</div>
+                                <span>Student Branch Executive Committee</span>
+                            </div>
+                        </div>
+                        <div class="officer-item">
+                            <div class="avatar-circle">S</div>
+                            <div class="officer-info">
+                                <h6>Ms. Sworn Prabha Pradhan</h6>
+                                <div class="officer-role">Secretary</div>
+                                <span>Student Branch Executive Committee</span>
+                            </div>
+                        </div>
+                        <div class="officer-item">
+                            <div class="avatar-circle">S</div>
+                            <div class="officer-info">
+                                <h6>Mr. Sam Leo Sahayaraj</h6>
+                                <div class="officer-role">Treasurer</div>
+                                <span>Student Branch Executive Committee</span>
+                            </div>
+                        </div>
+                        <div class="officer-item bg-light">
+                            <div class="avatar-circle"><i class="fas fa-chalkboard-teacher"></i></div>
+                            <div class="officer-info">
+                                <h6>Dr. AL Vallikannu</h6>
+                                <div class="officer-role">Student Branch Counsellor (HoD)</div>
+                                <span>Dept. of ECE</span>
+                            </div>
+                        </div>
+                        <div class="officer-item bg-light">
+                            <div class="avatar-circle"><i class="fas fa-user-tie"></i></div>
+                            <div class="officer-info">
+                                <h6>Dr. Pallavi Singh</h6>
+                                <div class="officer-role">Assistant Professor</div>
+                                <span>Dept. of ECE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="rasModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-robot me-2"></i> Robotics & Automation (RAS)
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0">
+                     <div class="officer-list">
+                        <div class="officer-item">
+                            <div class="avatar-circle">M</div>
+                            <div class="officer-info">
+                                <h6>S. Mahesh Kumar</h6>
+                                <div class="officer-role">Chairman</div>
+                                <span>Final Year</span>
+                            </div>
+                        </div>
+                        <div class="officer-item">
+                            <div class="avatar-circle">N</div>
+                            <div class="officer-info">
+                                <h6>Navaneet Sundar</h6>
+                                <div class="officer-role">Vice Chairman</div>
+                                <span>Third Year</span>
+                            </div>
+                        </div>
+                        <div class="officer-item">
+                            <div class="avatar-circle">R</div>
+                            <div class="officer-info">
+                                <h6>Rinoshajan</h6>
+                                <div class="officer-role">Secretary</div>
+                                <span>Member</span>
+                            </div>
+                        </div>
+                        <div class="officer-item">
+                            <div class="avatar-circle">D</div>
+                            <div class="officer-info">
+                                <h6>Deeraj K A K</h6>
+                                <div class="officer-role">Treasurer</div>
+                                <span>Member</span>
+                            </div>
+                        </div>
+                         <div class="officer-item bg-light">
+                            <div class="avatar-circle"><i class="fas fa-chalkboard-teacher"></i></div>
+                            <div class="officer-info">
+                                <h6>Dr. Himanshusekar</h6>
+                                <div class="officer-role">Faculty Advisor</div>
+                                <span>Member</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="commModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-satellite-dish me-2"></i> Communications Society
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0">
+                     <div class="officer-list">
+                        <div class="officer-item">
+                            <div class="avatar-circle">N</div>
+                            <div class="officer-info">
+                                <h6>Neha. P LV.</h6>
+                                <div class="officer-role">Chairman</div>
+                                <span>ECE</span>
+                            </div>
+                        </div>
+                        <div class="officer-item">
+                            <div class="avatar-circle">K</div>
+                            <div class="officer-info">
+                                <h6>Keshave Aathi Perumal C</h6>
+                                <div class="officer-role">Vice Chairman</div>
+                                <span>ECE</span>
+                            </div>
+                        </div>
+                        <div class="officer-item">
+                            <div class="avatar-circle">V</div>
+                            <div class="officer-info">
+                                <h6>Vishnu Vardhan K</h6>
+                                <div class="officer-role">Secretary</div>
+                                <span>ECE</span>
+                            </div>
+                        </div>
+                        <div class="officer-item">
+                            <div class="avatar-circle">D</div>
+                            <div class="officer-info">
+                                <h6>D.Venkata Praveen</h6>
+                                <div class="officer-role">Treasurer</div>
+                                <span>ECE</span>
+                            </div>
+                        </div>
+                         <div class="officer-item bg-light">
+                            <div class="avatar-circle"><i class="fas fa-chalkboard-teacher"></i></div>
+                            <div class="officer-info">
+                                <h6>Dr Himanshu Shekhar</h6>
+                                <div class="officer-role">Faculty Advisor</div>
+                                <span>ECE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="spModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-wave-square me-2"></i> Signal Processing Society
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0">
+                     <div class="officer-list">
+                        <div class="officer-item">
+                            <div class="avatar-circle">K</div>
+                            <div class="officer-info">
+                                <h6>K. Sai Chaitanaya</h6>
+                                <div class="officer-role">Chairperson</div>
+                                <span>ECE</span>
+                            </div>
+                        </div>
+                        <div class="officer-item">
+                            <div class="avatar-circle">A</div>
+                            <div class="officer-info">
+                                <h6>Aakash. K</h6>
+                                <div class="officer-role">Vice Chairperson</div>
+                                <span>ECE</span>
+                            </div>
+                        </div>
+                        <div class="officer-item">
+                            <div class="avatar-circle">K</div>
+                            <div class="officer-info">
+                                <h6>K. Mounika</h6>
+                                <div class="officer-role">Secretary</div>
+                                <span>ECE</span>
+                            </div>
+                        </div>
+                        <div class="officer-item">
+                            <div class="avatar-circle">P</div>
+                            <div class="officer-info">
+                                <h6>P. Charan</h6>
+                                <div class="officer-role">Treasurer</div>
+                                <span>ECE</span>
+                            </div>
+                        </div>
+                         <div class="officer-item bg-light">
+                            <div class="avatar-circle"><i class="fas fa-chalkboard-teacher"></i></div>
+                            <div class="officer-info">
+                                <h6>Dr P. Sankar</h6>
+                                <div class="officer-role">Faculty Advisor</div>
+                                <span>ECE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="events" class="section-padding fade-in-up">
+        <div class="container">
+            <div class="events-wrapper">
+                <div class="text-center mb-5">
+                    <h2 class="section-title">Event Highlights</h2>
+                    <p class="text-muted">Record of our technical events and workshops.</p>
+                </div>
+
+                <div class="event-card">
+                    <div class="row g-0">
+                        <div class="col-lg-6 p-5 d-flex flex-column justify-content-center">
+                            <div><span class="badge bg-primary rounded-pill mb-2">Milestone | Nov 2023</span></div>
+                            <h3 class="fw-bold mb-3">Photonics Society Inauguration</h3>
+                            <p class="text-muted mb-4">
+                                The establishment of the IEEE Photonics Society Student Chapter at HITS, focusing on optical communication.
+                            </p>
+                            <ul class="list-unstyled text-sm text-secondary">
+                                <li><i class="far fa-user me-2"></i> Chief Guest: Lt. Dr. T. D. Subash</li>
+                                <li><i class="fas fa-map-marker-alt me-2"></i> K S Moorthy Hall</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 bg-light">
+                            <div id="carousel1" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active"><img src="./photonics nov.png" class="d-block w-100" alt="Ev1"></div>
+                                    <div class="carousel-item"><img src="./photonics nov 2.png" class="d-block w-100" alt="Ev2"></div>
+                                    <div class="carousel-item"><img src="./industryworkshop.jpeg" class="d-block w-100" alt="Ev2"></div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carousel1" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carousel1" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="row g-0">
+                        <div class="col-lg-6 order-lg-1 bg-light">
+                            <div id="carousel2" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active"><img src="./research application 1.png" class="d-block w-100" alt="Ev1"></div>
+                                    <div class="carousel-item"><img src="./research application 2.png" class="d-block w-100" alt="Ev2"></div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carousel2" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carousel2" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 order-lg-2 p-5 d-flex flex-column justify-content-center">
+                            <div><span class="badge bg-secondary rounded-pill mb-2">Workshop | Apr 2024</span></div>
+                            <h3 class="fw-bold mb-3">Research Application in Photonics</h3>
+                            <p class="text-muted mb-4">
+                                Two-day hybrid workshop on Photonics Integrated Circuits and Quantum Computing Concepts.
+                            </p>
+                            <ul class="list-unstyled text-sm text-secondary">
+                                <li><i class="far fa-user me-2"></i> Speaker: Dr. Prita Nair</li>
+                                <li><i class="fas fa-clock me-2"></i> 2 Days</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="row g-0">
+                        <div class="col-lg-6 p-5 d-flex flex-column justify-content-center">
+                            <div><span class="badge bg-info text-dark rounded-pill mb-2">Lecture | Feb 2025</span></div>
+                            <h3 class="fw-bold mb-3">IEEE - A Unique Opportunity</h3>
+                            <p class="text-muted mb-4">
+                                Motivational lecture on enhancing career skills through IEEE membership resources.
+                            </p>
+                            <ul class="list-unstyled text-sm text-secondary">
+                                <li><i class="far fa-user me-2"></i> Speaker: Lt. Dr. T. D. Subash</li>
+                                <li><i class="fas fa-users me-2"></i> 81 Participants</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 bg-light">
+                            <div id="carousel3" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active"><img src="./unique feb 1.png" class="d-block w-100" alt="Ev1"></div>
+                                    <div class="carousel-item"><img src="./unique feb 2.png" class="d-block w-100" alt="Ev2"></div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carousel3" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carousel3" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="row g-0">
+                        <div class="col-lg-6 order-lg-1 bg-light">
+                            <div id="carouselEvent1" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-indicators">
+                                    <button type="button" data-bs-target="#carouselEvent1" data-bs-slide-to="0" class="active"></button>
+                                    <button type="button" data-bs-target="#carouselEvent1" data-bs-slide-to="1"></button>
+                                    <button type="button" data-bs-target="#carouselEvent1" data-bs-slide-to="2"></button>
+                                </div>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active"><img src="computer society inaguration 1.png" class="d-block w-100" alt="Speaker 1"></div>
+                                    <div class="carousel-item"><img src="computer society inagiration 2.png" class="d-block w-100" alt="Speaker 2"></div>
+                                    
+                                    
+                                    <div class="carousel-item"><img src="inauguration5.jpeg" class="d-block w-100" alt="Speaker 3"></div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselEvent1" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselEvent1" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 order-lg-2 p-5 d-flex flex-column justify-content-center">
+                            <div><span class="badge bg-primary rounded-pill mb-2">Milestone | Aug 2025</span></div>
+                            <h3 class="fw-bold mb-3">Computer Society Inauguration</h3>
+                            <p class="text-muted mb-4">
+                                Official launch featuring addresses from Dr. P. Sakthivel and Dr. S. Koteeswaran.
+                            </p>
+                            <ul class="list-unstyled text-sm text-secondary">
+                                <li><i class="far fa-calendar me-2"></i> 23 Aug 2025</li>
+                                <li><i class="fas fa-map-marker-alt me-2"></i> Padur Hall-1</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="row g-0">
+                        <div class="col-lg-6 p-5 d-flex flex-column justify-content-center">
+                            <div><span class="badge bg-success rounded-pill mb-2">Workshop | Sep 2025</span></div>
+                            <h3 class="fw-bold mb-3">Microsoft Azure Hands-on</h3>
+                            <p class="text-muted mb-4">
+                                Practical exposure to cloud storage solutions, Blob and File Storage led by Mr. E. Vigneshwaran.
+                            </p>
+                            <ul class="list-unstyled text-sm text-secondary">
+                                <li><i class="far fa-building me-2"></i> Temenos India</li>
+                                <li><i class="fas fa-map-marker-alt me-2"></i> BCA Lab</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 bg-light">
+                            <div id="carousel5" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active"><img src="./microdoft azure 2.png" class="d-block w-100" alt="Ev1"></div>
+                                    <div class="carousel-item"><img src="./microsoft azure 1.png" class="d-block w-100" alt="Ev2"></div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carousel5" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carousel5" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="row g-0">
+                        <div class="col-lg-6 order-lg-1 bg-light">
+                            <div id="carousel6" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active"><img src="./crafting web 1.png" class="d-block w-100" alt="Ev1"></div>
+                                    <div class="carousel-item"><img src="./crafting web 2.png" class="d-block w-100" alt="Ev2"></div>
+                                    <div class="carousel-item"><img src="./crafting the web.jpeg" class="d-block w-100" alt="Ev2"></div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carousel6" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carousel6" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 order-lg-2 p-5 d-flex flex-column justify-content-center">
+                            <div><span class="badge bg-warning text-dark rounded-pill mb-2">Dev | Nov 2025</span></div>
+                            <h3 class="fw-bold mb-3">Crafting the Web</h3>
+                            <p class="text-muted mb-4">
+                                Intensive frontend development workshop (HTML, CSS, JS) led by Codeship Technologies.
+                            </p>
+                            <ul class="list-unstyled text-sm text-secondary">
+                                <li><i class="fas fa-users me-2"></i> 120 Students</li>
+                                <li><i class="fas fa-laptop-code me-2"></i> Hands-on Coding</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="row g-0">
+                        <div class="col-lg-6 p-5 d-flex flex-column justify-content-center">
+                            <div><span class="badge bg-danger rounded-pill mb-2">Fun & Tech | Dec 2025</span></div>
+                            <h3 class="fw-bold mb-3">Meme Arena & ESCAPE-EXE</h3>
+                            <p class="text-muted mb-4">
+                                A blend of humor and logic: Meme Arena 1.0 and a puzzle-based technical escape room challenge.
+                            </p>
+                            <ul class="list-unstyled text-sm text-secondary">
+                                <li><i class="fas fa-gamepad me-2"></i> Bill Gates Lab</li>
+                                <li><i class="fas fa-trophy me-2"></i> Team Challenge</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 bg-light">
+                            <div id="carousel7" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active"><img src="meme1.png" class="d-block w-100" alt="Ev1"></div>
+                                    <div class="carousel-item"><img src="meme2.png" class="d-block w-100" alt="Ev2"></div>
+                                    <div class="carousel-item"><img src="meme3.png" class="d-block w-100" alt="Ev2"></div>
+                                    <div class="carousel-item"><img src="meme4.png" class="d-block w-100" alt="Ev2"></div>
+                                    <div class="carousel-item"><img src="cscertificate5.jpeg" class="d-block w-100" alt="Ev2"></div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carousel7" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carousel7" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="row g-0">
+                        <div class="col-lg-6 order-lg-1 bg-light">
+                            <div id="carousel8" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="cisco inv.jpeg" class="d-block w-100" alt="Ev1">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="cisco1.png" class="d-block w-100" alt="Ev2">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carousel8" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carousel8" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 order-lg-2 p-5 d-flex flex-column justify-content-center">
+                            <div><span class="badge bg-primary rounded-pill mb-2">Webinar | Dec 2025</span></div>
+                            <h3 class="fw-bold mb-3">Unlocking Opportunities at Cisco</h3>
+                            <p class="text-muted mb-4">
+                                A session demystifying careers & internships at Cisco, focusing on networking domains and application development tools.
+                            </p>
+                            <ul class="list-unstyled text-sm text-secondary">
+                                <li><i class="far fa-user me-2"></i> Speaker: Mr. Siva Prakash (Cisco)</li>
+                                <li><i class="fas fa-desktop me-2"></i> Virtual (Webex)</li>
+                                <li><i class="fas fa-users me-2"></i> 120 Students</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5>Contact Us</h5>
+                    <p class="small text-white-50">
+                        <i class="fas fa-map-marker-alt me-2"></i> Hindustan Institute of Technology & Science<br>
+                        1, Rajiv Gandhi Salai (OMR), Padur,<br>
+                        Chennai - 603 103, India.
+                    </p>
+                    <p class="small text-white-50"><i class="fas fa-phone me-2"></i> 1800 425 44 38</p>
+                    <p class="small text-white-50"><i class="fas fa-envelope me-2"></i> info@hindustanuniv.ac.in</p>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://hindustanuniv.ac.in/" target="_blank">Official HITS Website</a></li>
+                        <li><a href="https://www.ieee.org/" target="_blank">IEEE.org</a></li>
+                        <li><a href="#events">Join IEEE HITS</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <h5>Location</h5>
+                    <div class="ratio ratio-16x9 border border-secondary rounded">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.040704935981!2d80.20364931482083!3d12.83949699094246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525a5f6e8c3621%3A0x8091176223683103!2sHindustan%20Institute%20of%20Technology%20and%20Science!5e0!3m2!1sen!2sin!4v1626084000000!5m2!1sen!2sin" 
+                                style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 HITS IEEE Student Branch. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // --- 1. SMOOTH SCROLLING ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#' || targetId === '#top') return; 
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Close mobile menu if open
+                    const navbarToggler = document.querySelector('.navbar-toggler');
+                    const navbarCollapse = document.querySelector('.navbar-collapse');
+                    if (window.getComputedStyle(navbarToggler).display !== 'none' && navbarCollapse.classList.contains('show')) {
+                        navbarToggler.click();
+                    }
+                }
+            });
+        });
+
+        // --- 2. FADE IN ANIMATION ---
+        const observerOptions = { threshold: 0.15 };
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+        // --- 3. SCROLL TO TOP BUTTON ---
+        let mybutton = document.getElementById("btn-back-to-top");
+        window.onscroll = function () {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        };
+        mybutton.addEventListener("click", function () {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        });
+    </script>
+</body>
+</html>
